@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+    <script src="js/jquery-1.7.2.js"></script>
+    <script>
+    	(function(doc,win){
+    		var docEl=doc.documentElement,
+    		resizeEvt='orientationchange' in window ?'orientationchange':'resize',
+    		recalc=function(){
+    			var clientWidth=docEl.clientWidth;
+    			if(!clientWidth)return;
+    			if(clientWidth>=640){
+    				docEl.style.fontSize='10px';
+    			}else{
+    				docEl.style.fontSize=10 * (clientWidth/640)+'px';
+    			}
+    		};
+    		if(!doc.addEventListener)return;
+    		win.addEventListener(resizeEvt,recalc,false);
+    		doc.addEventListener('DOMContentLoaded',recalc,false);
+    	})(document,window);
+    </script>
+</head>
+<style>
+	body{
+		background-color:#fff;
+	}
+	ul,li{
+		list-style: none;
+		padding: 0;
+		margin:0;
+		font-size: 1.8rem;
+		color:#666;
+	}
+	ul{
+		width:60%;
+		height:6rem;
+		line-height: 6rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+    .active{
+    	color:#333;
+    	font-size: 2.5rem;
+    	font-weight: bold;
+    }
+    .index-title{
+    	height:6rem;
+		line-height: 6rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding:0 3rem;
+    }
+    .index-title div{
+    	width:15%;
+    	text-align: center;
+    }
+    .index-cnt{
+    	width:32rem;
+    	height:auto;
+    	margin:0 auto;
+    	overflow: hidden;
+    }
+    .index-cnt-inside{
+    	width:256rem;   	
+    }
+    .index-title-txt{
+    	width:30rem;
+    	height:20rem;
+    	border:1px solid red;
+    	font-size: 2rem;
+    	float: left;
+    	overflow: hidden;
+    }
+    .lunbo{
+    	width:128rem;
+    	height: 20rem;
+    }
+      .lunbo img{
+        float: left;
+      	width:32rem;
+      	height:20rem;
+      }
+</style>
+<body>
+	<div>
+		<!--导航栏-->
+		<div class="index-title">
+			<div class="mui-icon mui-icon-bars"></div>
+			<ul>
+				<li class="active">我的</li>
+				<li>发现</li>
+				<li>朋友</li>
+				<li>视频</li>
+			</ul>
+			<div class="mui-icon mui-icon-search"></div>
+		</div>
+		<!--内容区-->
+		<div class="index-cnt">
+			<div class="index-cnt-inside">
+		      <div class="index-title-txt">
+		      <!--轮播图-->
+		       <div class="lunbo">
+		       		<img src="images/4a_photo.png"/>
+		       		<img src="images/big_banner02.jpg"/>
+		       		<img src="images/chan_town_photo.png"/>
+		       </div>
+		      </div>
+		      <div class="index-title-txt">
+			发现
+		      </div>
+		      <div class="index-title-txt">
+			朋友
+		      </div>
+		      <div class="index-title-txt">
+			视频
+		     </div>
+		   </div>
+		</div>
+		
+		
+	</div>
+	<script>
+		$(document).ready(function(){
+			//点击切换导航栏
+          $('.index-title>ul>li').click(function(){
+          	for(var i=0;i<$('.index-title>ul>li').length;i++){
+          		$('.index-title>ul>li').eq(i).removeClass('active');
+          	}
+          	$(this).addClass('active');
+          	var index=$('.index-title>ul>li').index(this);
+          	lunbo(index);
+          });
+          //触摸活动导航栏模块
+          function lunbo(index){
+           	
+           	if(index==4){
+           		index=0;
+           	}
+           	var nowleft=-index*$('.index-cnt').width();
+           	console.log(index,nowleft);
+           	$('.index-cnt-inside').animate({'margin-left':nowleft});
+           }
+		})
+	</script>
+</body>
+</html>
